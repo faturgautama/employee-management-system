@@ -1,0 +1,63 @@
+<section id="login" class="flex flex-row h-screen bg-indigo-100 md:p-0 p-5">
+    <div class="w-8/12 hidden md:flex h-full">
+
+    </div>
+    <div [formGroup]="FormSignIn"
+        class="w-full md:w-4/12 flex justify-center flex-col h-full bg-white rounded-l-3xl shadow px-5">
+        <!-- Title -->
+        <div
+            class="flex flex-col items-center justify-center border border-b border-t-0 border-x-0 border-dashed border-gray-200 mb-3 pb-3">
+            <p class="text-gray-700 font-semibold text-xl">
+                Employee Management System
+            </p>
+
+            <p class="text-gray-600 text-sm">
+                Login Ke Akun Anda
+            </p>
+
+        </div>
+
+        <!-- Username -->
+        <div class="flex flex-col gap-1 mb-3">
+            <p class="text-gray-600 text-sm font-medium">
+                Username
+                <span class="text-red-500">*</span>
+            </p>
+
+            <input type="text" pInputText class="p-inputtext-sm w-full" formControlName="username">
+
+            <app-validator-message [show]="username.touched && username.invalid"
+                [caption]="'Username tidak boleh kosong'">
+            </app-validator-message>
+        </div>
+
+        <!-- Password -->
+        <div class="flex flex-col gap-1 mb-4">
+            <p class="text-gray-600 text-sm font-medium">
+                Password
+                <span class="text-red-500">*</span>
+            </p>
+
+            <p-password styleClass="p-inputtext-sm w-full" [feedback]="false" [toggleMask]="true"
+                formControlName="password" />
+
+            <app-validator-message [show]="password.touched && password.invalid"
+                [caption]="'Password tidak boleh kosong'">
+            </app-validator-message>
+        </div>
+
+        <!-- Button -->
+        <div class="flex flex-col gap-1 mb-3">
+            <p-button styleClass="p-button-sm p-button-info w-full" label="Login" [disabled]="FormSignIn.invalid"
+                (onClick)="handleLogin(FormSignIn.value)">
+            </p-button>
+        </div>
+
+        <!-- Version -->
+        <div class="flex w-full justify-center">
+            <p class="text-xs text-center text-gray-600">
+                Version 0.0.1
+            </p>
+        </div>
+    </div>
+</section>

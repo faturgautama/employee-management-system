@@ -1,0 +1,69 @@
+<div class="card">
+    <p-table [value]="datasource" [columns]="columns" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Menampilkan data ke {first} sampai {last} dari {totalRecords} data"
+        [rowsPerPageOptions]="[5, 10, 25, 50]" [scrollable]="true" scrollHeight="320px">
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field" class="text-center text-sm"
+                    [style.width]="col.width">
+                    <p-sortIcon [field]="col.field" styleClass="font-size: 12px"></p-sortIcon>
+                    {{ col.header }}
+                </th>
+                <th style="width:10%">
+                    Aksi
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns" class="{{ col.align ? 'text-' + col.align : 'text-start' }}">
+                    <!-- Date -->
+                    <span *ngIf="col.type == 'string'" class="text-sm">
+                        {{ rowData[col.field] }}
+                    </span>
+
+                    <!-- Date -->
+                    <span *ngIf="col.type == 'date'" class="text-sm">
+                        {{ rowData[col.field] | date: 'dd-MM-yyyy' }}
+                    </span>
+
+                    <!-- Currency -->
+                    <span *ngIf="col.type == 'currency'" class="text-sm">
+                        {{ rowData[col.field] | currency: 'Rp. ' }}
+                    </span>
+
+                    <!-- Status -->
+                    <span *ngIf="col.type == 'status' && rowData[col.field] == 'Active'"
+                        class="bg-green-200 text-green-600 rounded-md px-2 py-1 text-xs mx-auto">
+                        Aktif
+                    </span>
+
+                    <span *ngIf="col.type == 'status' && rowData[col.field] == 'Inactive'"
+                        class="bg-red-200 text-red-600 rounded-md px-2 py-1 text-xs">
+                        Non Aktif
+                    </span>
+
+                    <span *ngIf="col.type == 'status' && rowData[col.field] == 'On Leave'"
+                        class="bg-blue-200 text-blue-600 rounded-md px-2 py-1 text-xs">
+                        Sedang Cuti
+                    </span>
+                </td>
+
+                <td>
+                    <span class="text-blue-500 cursor-pointer mr-2" (click)="handleClickAction('detail', rowData)">
+                        <i class="pi pi-info" style="font-size: 14px;"></i>
+                    </span>
+
+                    <span class="text-yellow-500 cursor-pointer mr-2" (click)="handleClickAction('edit', rowData)">
+                        <i class="pi pi-pencil" style="font-size: 14px;"></i>
+                    </span>
+
+                    <span class="text-red-500 cursor-pointer" (click)="handleClickAction('delete', rowData)">
+                        <i class="pi pi-trash" style="font-size: 14px;"></i>
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,54 @@
+<section id="sidebar" class="w-full h-full flex flex-col px-3 py-5 transition-all delay-150">
+    <!-- User -->
+    <div class="flex flex-col transition-all items-center mb-10">
+        <!-- User Icon -->
+        <img src="../../../../assets/icon/user.png" alt="user"
+            class="transition-all mb-3 {{ ShowSidebar ? 'h-20 w-20' : 'h-10 w-10' }}">
+
+        <!-- Firstname -->
+        <p
+            class="{{ ShowSidebar ? 'text-gray-200' : 'text-transparent' }} transition-all text-center font-medium text-lg">
+            {{ UserData$?.firstName }}
+        </p>
+
+        <!-- Email -->
+        <p class="{{ ShowSidebar ? 'text-gray-300' : 'text-transparent' }} transition-all text-center text-sm">
+            {{ UserData$?.email }}
+        </p>
+    </div>
+
+    <!-- Menu -->
+    <div class="flex flex-col gap-0">
+        <p *ngIf="ShowSidebar" class="text-sky-500 text-base font-semibold mb-0">
+            Selamat Datang
+        </p>
+
+        <p *ngIf="ShowSidebar" class="text-gray-300 text-xs mb-5">
+            Silahkan pilih menu dibawah ini
+        </p>
+
+        <!-- Beranda -->
+        <div class="flex w-full {{ ShowSidebar ? 'items-start' : 'items-center justify-center'  }} gap-3 mb-5 cursor-pointer"
+            (click)="handleClickMenu('beranda')">
+            <span class="text-gray-300">
+                <i class="pi pi-home"></i>
+            </span>
+
+            <p *ngIf="ShowSidebar" class="text-gray-200 text-sm">
+                Beranda
+            </p>
+        </div>
+
+        <!-- Data Karyawan -->
+        <div class="flex w-full {{ ShowSidebar ? 'items-start' : 'items-center justify-center'  }} gap-3 cursor-pointer"
+            (click)="handleClickMenu('employee/list')">
+            <span class="text-gray-300">
+                <i class="pi pi-users"></i>
+            </span>
+
+            <p *ngIf="ShowSidebar" class="text-gray-200 text-sm">
+                Employee
+            </p>
+        </div>
+    </div>
+</section>

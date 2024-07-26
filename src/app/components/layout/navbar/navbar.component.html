@@ -1,0 +1,26 @@
+<section id="navbar"
+    class="flex justify-between items-center bg-white shadow-md h-[3.5rem] px-5 z-[10] border-b border-t-0 border-x-0 border-solid border-gray-200">
+    <!-- Brand -->
+    <div class="flex gap-3 items-center">
+        <span class="text-gray-600 cursor-pointer" (click)="handleToggleSidebar()">
+            <i class="pi pi-bars"></i>
+        </span>
+
+        <p class="text-gray-800 text-base font-medium">
+            Employee Management System
+        </p>
+    </div>
+
+    <!-- Action -->
+    <div class="flex gap-7 mr-10">
+        <!-- Home -->
+        <span class="text-gray-600 cursor-pointer" (click)="handleNavigateToBeranda()">
+            <i class="pi pi-home"></i>
+        </span>
+
+        <!-- Sign Out -->
+        <span class="text-gray-600 cursor-pointer" (click)="handleSignOut()">
+            <i class="pi pi-sign-out"></i>
+        </span>
+    </div>
+</section>

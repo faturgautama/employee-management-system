@@ -1,0 +1,167 @@
+<app-dashboard>
+    <!-- Heading -->
+    <div class="flex w-full bg-white p-8 shadow items-center justify-between mb-1">
+        <div class="flex flex-row gap-5 items-center ">
+            <div class="flex flex-col">
+                <p class="text-gray-800 font-bold text-4xl">
+                    Tambah Employee
+                </p>
+                <p class="text-gray-600 text-base">
+                    Tambah Data Employee Disini
+                </p>
+            </div>
+        </div>
+
+        <div class="flex flex-row justify-end w-4/12 gap-3">
+            <p-button styleClass="p-button-sm p-button-secondary" label="Kembali" (onClick)="handleBackToList()">
+            </p-button>
+
+            <p-button styleClass="p-button-sm p-button-info" label="Simpan" [disabled]="FormCreateEmployee.invalid"
+                (onClick)="handleSaveEmployee(FormCreateEmployee.value)">
+            </p-button>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="grid p-3" style="height: calc(100vh - 14rem); overflow-x: auto;">
+        <div [formGroup]="FormCreateEmployee" class="flex flex-row w-full bg-white shadow-sm p-3 rounded-md gap-5">
+            <div class="w-6/12 flex flex-col gap-3">
+                <!-- Username -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Username
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <input type="text" pInputText class="p-inputtext-sm w-full" formControlName="username">
+
+                    <app-validator-message [show]="username.touched && username.invalid"
+                        [caption]="'Username tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- FirstName -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Nama Depan
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <input type="text" pInputText class="p-inputtext-sm w-full" formControlName="firstName">
+
+                    <app-validator-message [show]="firstName.touched && firstName.invalid"
+                        [caption]="'Nama Depan tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Lastname -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Nama Belakang
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <input type="text" pInputText class="p-inputtext-sm w-full" formControlName="lastName">
+
+                    <app-validator-message [show]="lastName.touched && lastName.invalid"
+                        [caption]="'Nama Belakang tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Email -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Email
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <input type="email" pInputText class="p-inputtext-sm w-full" formControlName="email">
+
+                    <app-validator-message [show]="email.touched && email.invalid"
+                        [caption]="'Email tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Tanggal Lahir -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Tanggal Lahir
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <p-calendar formControlName="birthDate" styleClass="p-inputtext-sm w-full" [dateFormat]="'dd MM y'"
+                        appendTo="body">
+                    </p-calendar>
+
+                    <app-validator-message [show]="birthDate.touched && birthDate.invalid"
+                        [caption]="'Tanggal lahir tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+            </div>
+
+            <div class="w-6/12 flex flex-col gap-3">
+                <!-- Gaji Pokok -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Gaji Pokok
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <p-inputNumber styleClass="p-inputtext-sm w-full" formControlName="basicSalary"></p-inputNumber>
+
+                    <app-validator-message [show]="basicSalary.touched && basicSalary.invalid"
+                        [caption]="'Gaji Pokok tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Grup -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Grup
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <p-dropdown styleClass="p-inputtext-sm w-full" [options]="(Grup$ | async)!" optionLabel="label"
+                        optionValue="value" appendTo="body" [filter]="true" formControlName="group"
+                        [autoDisplayFirst]="false">
+                    </p-dropdown>
+
+                    <app-validator-message [show]="group.touched && group.invalid"
+                        [caption]="'Grup tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Status -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Status
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <p-dropdown styleClass="p-inputtext-sm w-full" [options]="(Status$ | async)!" optionLabel="label"
+                        optionValue="value" appendTo="body" [filter]="true" formControlName="status"
+                        [autoDisplayFirst]="false">
+                    </p-dropdown>
+
+                    <app-validator-message [show]="status.touched && status.invalid"
+                        [caption]="'Status tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+
+                <!-- Description -->
+                <div class="flex flex-col gap-1">
+                    <p class="text-gray-600 text-sm font-medium">
+                        Keterangan
+                        <span class="text-red-500">*</span>
+                    </p>
+
+                    <input type="text" pInputText class="p-inputtext-sm w-full" formControlName="description">
+
+                    <app-validator-message [show]="description.touched && description.invalid"
+                        [caption]="'Description tidak boleh kosong'">
+                    </app-validator-message>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-dashboard>
